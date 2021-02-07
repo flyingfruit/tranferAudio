@@ -10,11 +10,15 @@ class player():
         wf = wave.open(r"1_1.wav",'rb')
         p =PyAudio()
         stream=p.open(format=p.get_format_from_width(wf.getsampwidth()),channels=
-        wf.getnchannels(),rate=wf.getframerate(),output=True) 
+        wf.getnchannels(),rate=wf.getframerate(),output=True)
+        # time=0
         while True:
             data = wf.readframes(chunk)
-            if data == "":break
+            # 判断类型修改
+            if data == bytes("",encoding='utf-8'):break
             stream.write(data)
+            # print(time)
+            # time+=1
         stream.close()
         p.terminate()
 
